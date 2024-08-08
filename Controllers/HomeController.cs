@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PurchaseAppTest.Models;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace PurchaseAppTest.Controllers
 {
@@ -15,7 +16,8 @@ namespace PurchaseAppTest.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ViewData["Title"] = "Home Page";
+            return View(Product.GetProducts());
         }
 
         public IActionResult Privacy()
