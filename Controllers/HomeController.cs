@@ -14,12 +14,16 @@ namespace PurchaseApp.Controllers
             _logger = logger;
         }
 
+        //editar index contrller
         public IActionResult Index()
         {
             ViewData["Title"] = "Home Page";
-            return View(Product.GetProducts());
+            return View();
         }
-
+        public IActionResult CartView()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

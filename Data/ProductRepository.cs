@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PurchaseApp.Domain;
-using PurchaseApp.Data;
 
 namespace PurchaseApp.Data
 {
@@ -25,6 +24,7 @@ namespace PurchaseApp.Data
             return _context.Products.Find(id); // Fetch a specific product by ID
         }
 
+        //check methods
         public void AddProduct(Product product)
         {
             _context.Products.Add(product);

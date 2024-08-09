@@ -7,8 +7,14 @@ namespace PurchaseApp.Data
     {
         IEnumerable<Product> GetAllProducts();
         Product GetProductById(int id);
+        //revisa los sgts metodos
         void AddProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(int id);
     }
 }
+/* By implementing the repository pattern, you have created a clean separation between your data access 
+ * logic and your business logic. The IProductRepository interface defines the contract for accessing 
+ * product data, while the ProductRepository class provides the implementation using Entity Framework Core.
+This approach enhances maintainability and testability in your application, allowing you to easily mock 
+the repository in unit tests or swap out the data access layer in the future if needed. */

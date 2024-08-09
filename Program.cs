@@ -1,15 +1,23 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using PurchaseApp.Domain; // Adjust the namespace accordingly
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration; //nedded?
+using PurchaseApp.Data; //for GetProducts Interface
+//using PurchaseApp.Domain; // Adjust the namespace accordingly
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation(); // Enable runtime compilation
 
 // Configure SQLite database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
@@ -33,4 +41,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "products",
+    pattern: "{controller=Product}/{action=Index}/{id?}");
 app.Run();
+
+/* Step 3: Configure Routing Make sure your routing is set up correctly in your Program.cs 
+or Startup.cs file (depending on your ASP.NET Core version) to handle the new controllers. 
+(cart and product)*/
