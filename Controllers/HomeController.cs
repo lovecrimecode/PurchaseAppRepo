@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using PurchaseAppTest.Models;
+using PurchaseApp.Models;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace PurchaseAppTest.Controllers
+namespace PurchaseApp.Controllers
 {
     public class HomeController : Controller
     {

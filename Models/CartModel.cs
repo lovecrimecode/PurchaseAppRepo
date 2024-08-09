@@ -1,4 +1,6 @@
-﻿public class Cart
+﻿/*namespace PurchaseApp.Models
+{
+    public class Cart
 {
     public int Id { get; set; }
     public int UserId { get; set; }
@@ -24,3 +26,4 @@
         return total;
     }
 }
+}*/

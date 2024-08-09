@@ -1,4 +1,4 @@
-namespace PurchaseAppTest.Models
+namespace PurchaseApp.Models
 {
     public class ErrorViewModel
     {

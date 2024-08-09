@@ -1,4 +1,6 @@
-﻿public class Order
+﻿/*namespace PurchaseApp.Models
+{
+    public class OrderModel
 {
     public int Id { get; set; }
     public int UserId { get; set; }
@@ -12,4 +14,4 @@
         this.Total = cart.CalculateTotal();
         this.Status = "Pending";
     }
-}
+}}*/

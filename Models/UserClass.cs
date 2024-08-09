@@ -1,4 +1,6 @@
-﻿public class User
+﻿/*namespace PurchaseApp.Models
+{
+    public class User
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -14,4 +16,4 @@
     {
         return this.Name == name && BCrypt.Net.BCrypt.Verify(password, this.Password);
     }
-}
+}}*/
