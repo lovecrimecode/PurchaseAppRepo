@@ -1,25 +1,27 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration; //nedded?
-using PurchaseApp.Data; //for GetProducts Interface
-//using PurchaseApp.Domain; // Adjust the namespace accordingly
+using Microsoft.Extensions.Configuration; // Needed for configuration
+using PurchaseApp.Data; // For ApplicationDbContext
+using PurchaseApp.Domain; // For User class and other domain models
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation(); // Enable runtime compilation
+builder.Services.AddControllersWithViews();
+  //  .AddRazorRuntimeCompilation(); // Enable runtime compilation
 
 // Configure SQLite database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); // Ensure the connection string is correct
 
-builder.Services.AddDefaultIdentity<User>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+// Register Identity services
+builder.Services.AddDefaultIdentity<User>() // Use your User class defined in the Domain
+    .AddEntityFrameworkStores<ApplicationDbContext>(); // Use your ApplicationDbContext
 
+// Register your repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
@@ -27,10 +29,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    ////app.UseDeveloperExceptionPage();
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseExceptionHandler("/Home/Error"); // Show error page in production
+    app.UseHsts(); // Use HSTS in production
 }
 
 app.UseHttpsRedirection();
@@ -38,24 +38,19 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Enable authentication
 app.UseAuthorization();
 
-/*app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-*/
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"); // Default to Home controller
 
 app.MapControllerRoute(
     name: "products",
-    pattern: "{controller=Product}/{action=Index}/{id?}");
-app.Run();
+    pattern: "{controller=Product}/{action=Index}/{id?}"); // Route for Product controller
 
 app.MapControllerRoute(
     name: "cart",
-    pattern: "Cart/{action=Index}/{id?}");
-/* Step 3: Configure Routing Make sure your routing is set up correctly in your Program.cs 
-or Startup.cs file (depending on your ASP.NET Core version) to handle the new controllers. 
-(cart and product)*/
+    pattern: "Cart/{action=Index}/{id?}"); // Route for Cart controller
+
+app.Run();

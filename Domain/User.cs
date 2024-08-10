@@ -1,6 +1,8 @@
-﻿namespace PurchaseApp.Domain
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace PurchaseApp.Domain
 {
-    public class User
+    public class User : IdentityUser
     {
             public int Id { get; set; }
             public string Name { get; set; }

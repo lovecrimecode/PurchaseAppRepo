@@ -1,0 +1,43 @@
+﻿@model PurchaseApp.Domain.Cart
+
+@{
+    Layout = "_Layout"; // Use the shared layout
+}
+
+<h1>Checkout</h1>
+
+@if (Model.Items.Count == 0)
+{
+    <p>Your cart is empty. Please add products to your cart before proceeding to checkout.</p>
+}
+else
+{
+    <h2>Your Cart</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price.ToString("C")</td>
+                    <td>@(item.Quantity * item.Product.Price).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Total: @Model.CalculateTotal().ToString("C")</h3>
+
+    <form asp-action="Pay" asp-controller="Cart" method="post">
+        <button type="submit" class="btn btn-success">Pay</button>
+    </form>
+}
