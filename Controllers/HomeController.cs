@@ -1,38 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using PurchaseApp.Models;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace PurchaseApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        //editar index contrller
         public IActionResult Index()
         {
-            ViewData["Title"] = "Home Page";
-            return View();
-        }
-        public IActionResult CartView()
-        {
-            return View();
-        }
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(); // Return the Home view
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Privacy()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(); // Return the Privacy view
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PurchaseApp.Data;
-using PurchaseApp.Domain;
+using PurchaseApp.Data; // Ensure you have the correct namespace for your repository
+using PurchaseApp.Domain; // Ensure you import the domain namespace
 
 namespace PurchaseApp.Controllers
 {
@@ -13,62 +13,22 @@ namespace PurchaseApp.Controllers
             _productRepository = productRepository;
         }
 
+        // GET: /Product
         public IActionResult Index()
         {
-            var products = _productRepository.GetAllProducts();
-            return View(products);
-        }
-        public IActionResult Create()
-        {
-            return View(); // Return the create view
+            var products = _productRepository.GetAllProducts(); // Fetch all products
+            return View(products); // Pass the products to the view
         }
 
-        [HttpPost]
-        public IActionResult Create(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _productRepository.AddProduct(product); // Add the product to the database
-                return RedirectToAction("Index"); // Redirect to the products list
-            }
-            return View(product); // Return the view with the product data if validation fails
-        }
-/*        public IActionResult Details(int id)
+        // GET: /Product/Details/5
+        public IActionResult Details(int id)
         {
             var product = _productRepository.GetProductById(id);
             if (product == null)
             {
-                return NotFound();
+                return NotFound(); // Return 404 if product not found
             }
-           return View(product); */
-        public IActionResult Edit(int id)
-        {
-            var product = _productRepository.GetProductById(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product); // Return the edit view with the product data
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _productRepository.UpdateProduct(product); // Update the product in the database
-                return RedirectToAction("Index"); // Redirect to the products list
-            }
-            return View(product); // Return the view with the product data if validation fails
-        }
-
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            _productRepository.DeleteProduct(id); // Delete the product from the database
-            return RedirectToAction("Index"); // Redirect to the products list
-
-            // Additional actions for Add, Edit, Delete can be added here
+            return View(product); // Return the details view for the product
         }
     }
 }

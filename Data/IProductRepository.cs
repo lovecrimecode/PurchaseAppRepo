@@ -8,9 +8,6 @@ namespace PurchaseApp.Data
         IEnumerable<Product> GetAllProducts();
         Product GetProductById(int id);
         //revisa los sgts metodos
-        void AddProduct(Product product);
-        void UpdateProduct(Product product);
-        void DeleteProduct(int id);
     }
 }
 /* By implementing the repository pattern, you have created a clean separation between your data access 

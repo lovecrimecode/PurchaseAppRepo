@@ -1,24 +1,25 @@
-﻿
-@{
-    ViewData["Title"] = "Home";
+﻿@{
+    Layout = "_Layout"; // Use the shared layout
 }
-        @*editar como vista principal*@
-<h1>Homepage</h1>
 
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Price</td>
-            </tr>
-        }
-    </tbody>
-</table> *@
+<h1>Welcome to My Fruit Store!</h1>
+
+<p>Your one-stop shop for fresh and delicious fruits.</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Featured Products</h2>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a asp-controller="Product" asp-action="Index">View All Products</a>
+            </li>
+            <li class="list-group-item">
+                <a asp-controller="Cart" asp-action="Index">Go to Cart</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <h2>About Us</h2>
+        <p>We offer a wide variety of fresh fruits sourced from local farmers. Our mission is to provide high-quality produce at affordable prices.</p>
+    </div>
+</div>

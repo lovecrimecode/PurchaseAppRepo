@@ -17,6 +17,9 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<User>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
@@ -43,6 +46,10 @@ app.UseAuthorization();
 */
 app.MapControllerRoute(
     name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"); // Default to Home controller
+
+app.MapControllerRoute(
+    name: "products",
     pattern: "{controller=Product}/{action=Index}/{id?}");
 app.Run();
 

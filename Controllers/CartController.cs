@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PurchaseApp.Data;
 using PurchaseApp.Domain;
-using System.Linq;
+//using System.Linq;
 
 namespace PurchaseApp.Controllers
 {
@@ -38,12 +38,14 @@ namespace PurchaseApp.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: /Cart/Checkout
         [HttpPost]
         public IActionResult Checkout()
         {
-            // Handle checkout logic here
-            return RedirectToAction("Index", "Home");
-            // Redirect to home or a confirmation page
+            // Handle checkout logic here (e.g., create an order, save to database)
+            // For now, just clear the cart and redirect to the home page
+            _cart = new Cart(); // Clear the cart
+            return RedirectToAction("Index", "Home"); // Redirect to home or confirmation page
         }
     }
 }
