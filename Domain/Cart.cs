@@ -33,7 +33,7 @@ namespace PurchaseApp.Domain
 
         public decimal CalculateTotal()
         {
-            return Items.Sum(item => item.Quantity * item.Product.Price); // Calculate total price
+            return Items.Sum(item => item.CalculateSubtotal()); // Sum the subtotals of all items
         }
     }
 }

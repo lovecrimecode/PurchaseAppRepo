@@ -4,19 +4,19 @@ namespace PurchaseApp.Domain
 {
     public class User : IdentityUser
     {
-            public int Id { get; set; }
-            public string Name { get; set; }
+        public override string Id { get => base.Id; set => base.Id = value; }
+        public string Username { get; set; }
             public string Password { get; set; }
 
-            public void RegisterUser(string name, string password)
+            public void RegisterUser(string username, string password)
             {
-                this.Name = name;
+                this.Username = username;
                 this.Password = BCrypt.Net.BCrypt.HashPassword(password);
             }
 
-            public bool Login(string name, string password)
+            public bool Login(string username, string password)
             {
-                return this.Name == name && BCrypt.Net.BCrypt.Verify(password, this.Password);
+                return this.Username == username && BCrypt.Net.BCrypt.Verify(password, this.Password);
             }
         }
 }

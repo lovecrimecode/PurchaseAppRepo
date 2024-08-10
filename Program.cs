@@ -53,4 +53,8 @@ app.MapControllerRoute(
     name: "cart",
     pattern: "Cart/{action=Index}/{id?}"); // Route for Cart controller
 
+app.MapControllerRoute(
+    name: "account",
+    pattern: "Account/{action=Login}/{id?}");
+
 app.Run();

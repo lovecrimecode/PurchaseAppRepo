@@ -8,7 +8,6 @@
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -16,7 +15,7 @@
         {
             <tr>
                 <td>@product.Name</td>
-                <td>@product.Price.ToString("C")</td>
+                <td>@product.Price</td>
                 <td>
                     <form asp-action="AddToCart" asp-controller="Cart" method="post" style="display:inline;">
                         <input type="hidden" name="productId" value="@product.Id" />

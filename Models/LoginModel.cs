@@ -1,8 +1,14 @@
-﻿namespace PurchaseApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PurchaseApp.Models
 {
     public class LoginModel
     {
-        public string Name { get; set; }
+        [Required]
+        public string Username { get; set; } // Use Username for login
+
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }
