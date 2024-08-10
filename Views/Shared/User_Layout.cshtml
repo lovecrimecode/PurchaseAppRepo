@@ -1,4 +1,49 @@
-﻿@{
+﻿@* @{
+    Layout = null;  // This allows this layout to be used as a standalone layout
+}
+ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PurchaseApp</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Common header/navigation code can go here -->
+        <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+                <div class="card login-logout-card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Account/Login">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Account/Register">Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-10 my-4">
+                                @RenderBody() <!-- This is where the view content will be injected -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Common footer code can go here -->
+    </div>
+</body>
+</html>
+
+
+
+@* @{
 Layout = null;
 
 }
@@ -14,7 +59,7 @@ Layout = null;
                         </a>
                         </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=/Account/Register">
+                        <a class="nav-link" href="/Account/Register">
                             Register
                         </a>
                     </li>
@@ -28,12 +73,4 @@ Layout = null;
             </div>
         </div>
     </div>
-</div>
-
-@* @section Scripts{
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-@await RenderSectichAsync("Scripts", required: false) *@
+</div> *@

@@ -79,7 +79,7 @@ body {
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -2182,7 +2182,7 @@ progress {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2368,7 +2368,7 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2429,7 +2429,7 @@ textarea.form-control-lg {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   appearance: none;
   -webkit-print-color-adjust: exact;
   color-adjust: exact;
@@ -2518,7 +2518,7 @@ textarea.form-control-lg {
   padding: 0;
   background-color: transparent;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   appearance: none;
 }
 .form-range:focus {
@@ -2571,7 +2571,7 @@ textarea.form-control-lg {
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -moz-appearance: none;
+  appearance: none;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -6333,14 +6333,14 @@ textarea.form-control-lg {
 
 @-webkit-keyframes placeholder-wave {
   100% {
-    -webkit-mask-position: -200% 0%;
+    mask-position: -200% 0%;
     mask-position: -200% 0%;
   }
 }
 
 @keyframes placeholder-wave {
   100% {
-    -webkit-mask-position: -200% 0%;
+    mask-position: -200% 0%;
     mask-position: -200% 0%;
   }
 }

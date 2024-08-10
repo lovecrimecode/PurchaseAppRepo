@@ -11,8 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddRazorPages(); 
-  //  .AddRazorRuntimeCompilation(); // Enable runtime compilation
 
 // Configure SQLite database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -22,6 +20,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>() // Use your User class defined in the Domain
     .AddEntityFrameworkStores<ApplicationDbContext>() // Use your ApplicationDbContext
     .AddDefaultTokenProviders();
+
+// Configure logging (optional)
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 // Register your repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
@@ -42,6 +45,7 @@ app.UseRouting();
 app.UseAuthentication(); // Enable authentication
 app.UseAuthorization();
 
+// Map controller routes
 app.MapControllerRoute(
     name: "home",
     pattern: "{controller=Home}/{action=Index}/{id?}"); // Default to Home controller
@@ -56,6 +60,6 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "account/default",
-    pattern: "Account/{action=Login}/{id?}");
+    pattern: "Account/{action=Login}/{id?}"); // Route for Account controller
 
 app.Run();
