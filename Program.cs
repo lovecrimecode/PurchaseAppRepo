@@ -37,15 +37,18 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+*/
 app.MapControllerRoute(
-    name: "products",
+    name: "default",
     pattern: "{controller=Product}/{action=Index}/{id?}");
 app.Run();
 
+app.MapControllerRoute(
+    name: "cart",
+    pattern: "Cart/{action=Index}/{id?}");
 /* Step 3: Configure Routing Make sure your routing is set up correctly in your Program.cs 
 or Startup.cs file (depending on your ASP.NET Core version) to handle the new controllers. 
 (cart and product)*/
