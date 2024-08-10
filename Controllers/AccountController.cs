@@ -9,13 +9,12 @@ namespace PurchaseApp.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<User> _signInManager;
-
-        public AccountController(SignInManager<User> signInManager)
+        private readonly UserManager<User> _userManager;
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager) // Inject UserManager
         {
             _signInManager = signInManager;
+            _userManager = userManager; // Assign the injected UserManager
         }
-        private readonly UserManager<User> _userManager;
-
         // GET: /Account/Login
         public IActionResult Login()
         {
