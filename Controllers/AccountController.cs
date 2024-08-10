@@ -45,10 +45,6 @@ namespace PurchaseApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home"); // Redirect to home page after logout
         }
-        public IActionResult Register()
-        {
-            return View();
-        }
         public async Task<IActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
