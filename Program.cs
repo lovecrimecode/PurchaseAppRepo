@@ -9,17 +9,34 @@ using PurchaseApp.Domain; // For User class and other domain models
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorPages();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Ensure cookies are only sent over HTTPS
+    options.Cookie.SameSite = SameSiteMode.Lax; // Adjust SameSite as needed
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+    builder.Services.AddControllers();
 
 // Configure SQLite database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); // Ensure the connection string is correct
 
-// Register Identity services
-builder.Services.AddIdentity<User, IdentityRole>() // Use your User class defined in the Domain
-    .AddEntityFrameworkStores<ApplicationDbContext>() // Use your ApplicationDbContext
-    .AddDefaultTokenProviders();
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 0;
+    options.Password.RequiredUniqueChars = 0;
+    options.User.RequireUniqueEmail = false;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
 // Configure logging (optional)
 builder.Logging.AddConsole();
@@ -45,7 +62,14 @@ app.UseRouting();
 app.UseAuthentication(); // Enable authentication
 app.UseAuthorization();
 
+app.MapRazorPages();
+
 // Map controller routes
+
+app.MapControllerRoute(
+    name: "account",
+    pattern: "{controller=Account}/{action=Login}/{id?}"); // Route for Account controller
+
 app.MapControllerRoute(
     name: "home",
     pattern: "{controller=Home}/{action=Index}/{id?}"); // Default to Home controller
@@ -58,8 +82,6 @@ app.MapControllerRoute(
     name: "cart",
     pattern: "Cart/{action=Index}/{id?}"); // Route for Cart controller
 
-app.MapControllerRoute(
-    name: "account/default",
-    pattern: "Account/{action=Login}/{id?}"); // Route for Account controller
+
 
 app.Run();

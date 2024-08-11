@@ -7,16 +7,7 @@ namespace PurchaseApp.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Dashboard", "Home");
-
-            }
-            else
-            {
-                // Muestra la vista de inicio de sesión/registro si no está autenticado
-                return RedirectToAction("Login", "Account");
-            }// Return the Home view
+            return View();// Return the Home view
         }
 
         public IActionResult Privacy()

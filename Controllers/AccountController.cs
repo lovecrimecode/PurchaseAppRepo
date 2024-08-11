@@ -21,6 +21,7 @@ namespace PurchaseApp.Controllers
 
         #region Login
         // GET: /Account/Login
+        [HttpGet]
         public IActionResult Login()
         {
             _logger.LogInformation("Navigated to the Login page.");
@@ -32,28 +33,19 @@ namespace PurchaseApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            if (ModelState.IsValid)
-            {
                 _logger.LogInformation("Attempting login for user {Username}.", model.Username);
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
+
                     _logger.LogInformation("User {Username} logged in successfully.", model.Username);
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    _logger.LogWarning("Invalid login attempt for user {Username}.", model.Username);
-                }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            }
-            _logger.LogInformation("Login failed for user {Username}.", model.Username);
+             
             return View(model);
         }
         #endregion
 
         #region Logout
         // GET: /Account/Logout
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -63,6 +55,7 @@ namespace PurchaseApp.Controllers
         #endregion
 
         #region Registration
+        [HttpGet]
         public IActionResult Register()
         {
             _logger.LogInformation("Navigated to the Registration page.");
@@ -73,27 +66,16 @@ namespace PurchaseApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Username, Password = model.Password };
+
+                var user = new User { UserName = model.Username };
                 _logger.LogInformation("Attempting to register user {Username}.", model.Username);
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
+
+
                     _logger.LogInformation("User {Username} registered successfully.", model.Username);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        _logger.LogWarning("Registration error for user {Username}: {ErrorDescription}", model.Username, error.Description);
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-            }
-            _logger.LogInformation("Registration failed for user {Username}.", model.Username);
+
             return View(model);
         }
         #endregion
